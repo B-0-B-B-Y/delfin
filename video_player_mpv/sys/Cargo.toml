@@ -19,26 +19,28 @@ libc = "0.2"
 
 [dependencies.gio]
 package = "gio-sys"
-version = "*"
+version = "0.19.8"
 
 [dependencies.glib]
 package = "glib-sys"
-version = "*"
+version = "0.19.8"
 
 [dependencies.gobject]
 package = "gobject-sys"
-version = "*"
+version = "0.19.8"
 
 [dependencies.gtk]
 package = "gtk4-sys"
-version = "*"
+version = "0.8.2"
 
 [dependencies.gdk]
 package = "gdk4-sys"
-version = "*"
+version = "0.8.2"
 
 [build-dependencies]
-system-deps = "6"
+system-deps = "6.2"
+cc = "1.1"
+pkg-config = "0.3"
 
 [dev-dependencies]
 shell-words = "1.0.0"

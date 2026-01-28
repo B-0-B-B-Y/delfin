@@ -5,29 +5,56 @@
 
 // oh no i edited it anyways
 
-#[cfg(not(docsrs))]
-use std::process;
-
 #[cfg(docsrs)]
-fn main() {} // prevent linking libraries to avoid documentation failure
+fn main() {}
 
 #[cfg(not(docsrs))]
 fn main() {
-    println!(
-        "cargo:rustc-link-search={}",
-        std::env::current_dir()
-            .unwrap()
-            .join("build/")
-            .to_str()
-            .unwrap()
-    );
+    use std::path::PathBuf;
 
+    // Build the C helper library (was Meson before)
+    let mut build = cc::Build::new();
+    let here = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
+    let cdir = here.join("video-player-mpv");
+
+    // Pull CFLAGS from pkg-config for the required libs
+    let gtk = pkg_config::probe_library("gtk4").expect("gtk4 dev package");
+    let epoxy = pkg_config::probe_library("epoxy").expect("libepoxy dev package");
+    let mpv = pkg_config::probe_library("mpv").expect("libmpv dev package");
+
+    for inc in gtk
+        .include_paths
+        .iter()
+        .chain(epoxy.include_paths.iter())
+        .chain(mpv.include_paths.iter())
+    {
+        build.include(inc);
+    }
+    // Local headers expect the include root to be the crate dir (for "video-player-mpv/track.h")
+    build.include(&here);
+
+    build
+        .files([
+            cdir.join("video-player-mpv.c"),
+            cdir.join("track-list.c"),
+            cdir.join("track.c"),
+        ])
+        .flag_if_supported("-fPIC")
+        .flag_if_supported("-Wno-deprecated-declarations")
+        .include(&cdir)
+        .compile("video-player-mpv");
+
+    let out_dir = PathBuf::from(std::env::var("OUT_DIR").unwrap());
+    println!("cargo:rustc-link-search={}", out_dir.display());
+
+    // Link required system libs
+    println!("cargo:rustc-link-lib=static=video-player-mpv");
     println!("cargo:rustc-link-lib=gtk-4");
     println!("cargo:rustc-link-lib=epoxy");
     println!("cargo:rustc-link-lib=mpv");
 
+    // Probe pkg-config deps to surface nicer errors if missing
     if let Err(s) = system_deps::Config::new().probe() {
         println!("cargo:warning={s}");
-        process::exit(1);
     }
 }

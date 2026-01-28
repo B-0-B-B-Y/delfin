@@ -1,13 +1,11 @@
 use anyhow::Result;
-use fluent_templates::lazy_static::lazy_static;
 use jellyfin_api::types::{
     DeviceProfile, DirectPlayProfile, DlnaProfileType, SubtitleDeliveryMethod, SubtitleProfile,
 };
+use once_cell::sync::Lazy;
 
-lazy_static! {
-    pub static ref DEVICE_PROFILE_DIRECT_PLAY: DeviceProfile =
-        device_profile_direct_play().expect("Error generating device profile");
-}
+pub static DEVICE_PROFILE_DIRECT_PLAY: Lazy<DeviceProfile> =
+    Lazy::new(|| device_profile_direct_play().expect("Error generating device profile"));
 
 const SUB_FORMATS: &[&str] = &["srt", "ass", "sub", "vtt"];
 

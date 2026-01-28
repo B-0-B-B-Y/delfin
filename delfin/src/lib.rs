@@ -7,7 +7,9 @@ pub mod jellyfin_api;
 pub mod library;
 pub mod locales;
 pub mod media_details;
-pub mod meson_config;
+pub mod meson_config {
+    include!(concat!(env!("OUT_DIR"), "/meson_config.rs"));
+}
 pub mod preferences;
 pub mod servers;
 pub mod utils;

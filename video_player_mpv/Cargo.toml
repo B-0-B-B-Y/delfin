@@ -12,7 +12,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
 libc = "0.2"
-gtk4-sys = "*"
+gtk4-sys = "0.8.2"
 
 [dependencies.ffi]
 package = "vpm-sys"
@@ -20,15 +20,15 @@ path = "./sys"
 
 [dependencies.glib]
 package = "glib"
-version = "*"
+version = "0.19.9"
 
 [dependencies.gdk]
 package = "gdk4"
-version = "*"
+version = "0.8.2"
 
 [dependencies.gtk]
 package = "gtk4"
-version = "*"
+version = "0.8.2"
 
 [lints.clippy]
 missing_transmute_annotations = "allow"

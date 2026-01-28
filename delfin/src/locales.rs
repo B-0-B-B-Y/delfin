@@ -1,4 +1,5 @@
-use fluent_templates::{lazy_static::lazy_static, FluentLoader};
+use fluent_templates::FluentLoader;
+use once_cell::sync::Lazy;
 use sys_locale::get_locale;
 use tera::Tera;
 use tracing::warn;
@@ -14,14 +15,14 @@ fluent_templates::static_loader! {
     };
 }
 
-lazy_static! {
-    pub static ref DEFAULT_LANGUAGE: LanguageIdentifier = get_locale()
+pub static DEFAULT_LANGUAGE: Lazy<LanguageIdentifier> = Lazy::new(|| {
+    get_locale()
         .and_then(|l| l.parse().ok())
         .unwrap_or_else(|| {
             warn!("Error parsing system locale, defaulting to en-US");
             langid!("en-US")
-        });
-}
+        })
+});
 
 pub fn current_language() -> LanguageIdentifier {
     CONFIG

@@ -1,8 +1,8 @@
-# Delfin [![status-badge](https://ci.codeberg.org/api/badges/12819/status.svg)](https://ci.codeberg.org/repos/12819)
+# Delfin
 
 Stream movies and TV shows from Jellyfin.
 
-Downloads are available at [delfin.avery.cafe](https://delfin.avery.cafe/).
+Originally forked from https://codeberg.org/avery42/delfin.
 
 ## Features/Roadmap
 
@@ -19,7 +19,7 @@ The following features are currently implemented or planned:
 - *Syncplay (planned)*
 - *Transcoded playback (planned)*
 
-These features aren't planned at the moment (but maybe in the future):
+These features will be added as part of this fork and (hopefully) revival of this project, with more coming too:
 
 - Managing your collections
 - Server administration
@@ -27,26 +27,45 @@ These features aren't planned at the moment (but maybe in the future):
 
 ## Development Setup
 
+### Easiest: Docker (no host deps)
+1. Build the dev image: `sudo docker build -f Dockerfile.dev -t delfin-dev .`
+2. Run a shell:  
+   `sudo docker run --rm -it -v "$PWD":/workspace -v delfin-cargo-cache:/usr/local/cargo/registry -v delfin-target:/workspace/target delfin-dev bash`
+3. Inside the container: `cargo build` (and `cargo test`, `cargo audit`).
+4. To produce a host-usable binary in `./target/release` without an interactive shell:  
+   ```bash
+   sudo docker run --rm \
+     -v "$PWD":/workspace \
+     -v "$PWD/target":/workspace/target \
+     -v delfin-cargo-cache:/usr/local/cargo/registry \
+     delfin-dev \
+     bash -lc "cd /workspace && cargo build --release"
+   ```
+
+### Native (host)
+Install the native GTK/GLib stack and friends (Ubuntu/Mint):
+```
+sudo apt-get install -y \
+  pkg-config libglib2.0-dev libglib2.0-bin \
+  libgtk-4-dev libgdk-pixbuf-2.0-dev libcairo2-dev libpango1.0-dev libgraphene-1.0-dev \
+  libadwaita-1-dev \
+  libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+  libepoxy-dev libmpv-dev
+```
+Then build with `cargo build`.
+
+### Optional
 - Install pre-commit hooks with `pre-commit install`
-- `meson setup build && cd build`
-- `meson compile`
-- `./delfin/delfin`
+- Use `mold` linker for faster builds if available.
 
-### Mold Linker
-
-Using the [mold](https://github.com/rui314/mold/) linker is recommended, as it
-can significantly speed up compile times. It will be used automatically when
-available.
+### Flatpak packaging (Meson)
+Meson files remain for Flatpak builds. To produce a Flatpak bundle:
+```
+meson setup -Dprofile=release -Dflatpak=true build-dist
+meson dist -C build-dist
+```
+See `build-aux/cafe.avery.Delfin.Devel.yaml` and `build-aux/build-flatpak-dist` for the packaging flow.
 
 ## Translations
 
-Contributions to translations are welcome on [Weblate](https://translate.codeberg.org/projects/delfin/).
-
-<a href="https://translate.codeberg.org/engage/delfin/">
-    <img src="https://translate.codeberg.org/widget/delfin/open-graph.png" alt="Translation status" width="400px" />
-</a>
-
-<br />
-<a href="https://translate.codeberg.org/engage/delfin/">
-    <img src="https://translate.codeberg.org/widget/delfin/multi-auto.svg" alt="Translation status" />
-</a>
+Translations will be re-opened once I figure out the best way to open that out to the community.

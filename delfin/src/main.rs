@@ -5,7 +5,7 @@ use delfin::{
     app::{App, APP_BROKER},
     meson_config::{APP_ID, BUILDDIR, RESOURCES_FILE},
 };
-use gtk::gio;
+use gtk::{gio, glib};
 use relm4::{gtk, RelmApp};
 use tracing::log::LevelFilter;
 
@@ -34,14 +34,17 @@ fn load_css<T: Debug>(app: &RelmApp<T>) {
 }
 
 fn load_resources() -> Result<()> {
-    let res = match gio::Resource::load(RESOURCES_FILE) {
-        Ok(res) => res,
-        Err(_) if cfg!(debug_assertions) => {
+    // Prefer embedded bytes generated at build time.
+    let res = gio::Resource::from_data(&glib::Bytes::from_static(
+        delfin::meson_config::RESOURCES_BYTES,
+    ))
+    .or_else(|_| {
+        // Fallback to on-disk locations for dev builds.
+        gio::Resource::load(RESOURCES_FILE).or_else(|_| {
             gio::Resource::load(PathBuf::from(BUILDDIR).join("data/resources.gresource"))
-                .context("Could not load fallback gresource file")?
-        }
-        Err(_) => bail!("Could not load gresource file"),
-    };
+        })
+    })
+    .map_err(|_| anyhow::anyhow!("Could not load gresource file"))?;
 
     gio::resources_register(&res);
     Ok(())

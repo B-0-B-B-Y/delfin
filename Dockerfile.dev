@@ -1,0 +1,24 @@
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
+
+# System dependencies for GTK/GLib/Cairo/GStreamer builds plus general build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates pkg-config build-essential git curl \
+    libgtk-4-dev libglib2.0-dev libgdk-pixbuf-2.0-dev libcairo2-dev \
+    libpango1.0-dev libadwaita-1-dev libgraphene-1.0-dev \
+    libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+    libepoxy-dev libmpv-dev \
+    libssl-dev libudev-dev libclang-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Rust toolchain pinned to repo version
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --default-toolchain 1.93.0 \
+    && rustup component add clippy rustfmt
+
+WORKDIR /workspace

@@ -2,7 +2,7 @@
 name = "delfin"
 version = "0.4.8"
 edition = "2021"
-rust-version = "1.75.0"
+rust-version = "1.93.0"
 
 [features]
 # Enables GStreamer video player backend
@@ -20,7 +20,7 @@ image = { version = "0.25.1", default-features = false, features = ["jpeg"] }
 jellyfin_api = "10.9.2-1"
 relm4 = { workspace = true }
 relm4-icons = { version = "0.8.2" }
-reqwest = { version = "0.12.2", features = ["json"] }
+reqwest = { version = "0.12.28", default-features = false, features = ["json", "rustls-tls"] }
 serde = { version = "1.0.197", features = ["derive"] }
 serde_json = "1.0.115"
 serde_repr = "0.1.18"
@@ -37,6 +37,8 @@ uuid = { version = "1.8.0", features = ["v4"] }
 video_player_gst = { version = "0.1.0", path = "../video_player_gst", optional = true }
 video_player_mpv = { version = "0.1.0", path = "../video_player_mpv" }
 whoami = { version = "1.5.1", default-features = false }
+once_cell = "1.19"
+glib = "0.19.9"
 
 [build-dependencies]
 grass = "0.13.2"

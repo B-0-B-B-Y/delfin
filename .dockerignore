@@ -1,0 +1,6 @@
+target
+.git
+.gitmodules
+.gitignore
+tmp
+*.log
