@@ -1,0 +1,6 @@
+/target
+.scratch
+.flatpak-builder
+.cache
+.cargo/
+.direnv/

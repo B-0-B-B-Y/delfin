@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2023 Avery -->
+<component type="desktop-application">
+  <id>@APP_ID@</id>
+
+  <name>Delfin</name>
+  <summary>Stream movies and TV shows from Jellyfin</summary>
+
+  <description>
+    <p>Delfin is a native client for the Jellyfin media server. It features a fast and clean
+      interface to stream your media in an embedded MPV-based video player.</p>
+
+    <p>Delfin currently supports streaming movies and TV shows from your library. The video
+      player
+      supports the Intro Skipper plugin for skipping intros automatically, and the Jellyscrub
+      plugin
+      to show thumbnails while scrubbing through videos.</p>
+
+    <p>This is an early release, you may run into bugs or missing features. Delfin does not come
+      with any media, you must connect to a Jellyfin server. Plugins must be installed and
+      configured on your server to be available from Delfin.</p>
+  </description>
+
+  <screenshots>
+    <screenshot type="default" environment="gnome:dark">
+      <caption>The library home page</caption>
+      <image type="source">https://delfin.avery.cafe/screenshots/flathub-1.png</image>
+    </screenshot>
+    <screenshot environment="gnome:dark">
+      <caption>Viewing details and episodes for a TV show</caption>
+      <image type="source">https://delfin.avery.cafe/screenshots/flathub-2.png</image>
+    </screenshot>
+    <screenshot environment="gnome:dark">
+      <caption>The video player</caption>
+      <image type="source">https://delfin.avery.cafe/screenshots/flathub-3.png</image>
+    </screenshot>
+    <screenshot environment="gnome">
+      <caption>The library home page</caption>
+      <image type="source">https://delfin.avery.cafe/screenshots/flathub-4.png</image>
+    </screenshot>
+    <screenshot environment="gnome">
+      <caption>Viewing details and episodes for a TV show</caption>
+      <image type="source">https://delfin.avery.cafe/screenshots/flathub-5.png</image>
+    </screenshot>
+  </screenshots>
+
+  <metadata_license>CC-BY-SA-4.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+
+  <url type="homepage">https://delfin.avery.cafe/</url>
+  <url type="bugtracker">https://codeberg.org/avery42/delfin/issues</url>
+  <url type="translate">https://translate.codeberg.org/projects/delfin/</url>
+  <url type="vcs-browser">https://codeberg.org/avery42/delfin</url>
+
+  <developer id="avery.cafe">
+    <name>Avery</name>
+  </developer>
+
+  <update_contact>delfin@avery.cafe</update_contact>
+
+  <content_rating type="oars-1.1" />
+
+  <recommends>
+    <display_length compare="ge">600</display_length>
+    <control>pointing</control>
+  </recommends>
+
+  <supports>
+    <internet>always</internet>
+  </supports>
+
+  <launchable type="desktop-id">@APP_ID@.desktop</launchable>
+
+  <categories>
+    <category>AudioVideo</category>
+    <category>Video</category>
+    <category>Player</category>
+    <category>TV</category>
+    <category>GTK</category>
+    <category>GNOME</category>
+  </categories>
+
+  <provides>
+    <binary>delfin</binary>
+  </provides>
+
+  <releases>
+    <release version="0.4.8" date="2024-11-22">
+      <description>
+        <ul>
+          <li>Added an overflow menu to the video player. This menu allows you to modify deinterlacing and hardware decoding options, along with accessing keyboard shortcuts and debug info.</li>
+          <li>Added a hardware decoding preference.</li>
+          <li>Added deinterlacing to video player.</li>
+          <li>Fixed a video player crash on Wayland with some GTK versions.</li>
+          <li>Fixed video sometimes flickering during loading and seeking.</li>
+          <li>Fixed the video going black if you resize the window while it's paused.</li>
+          <li>Fixed trickplay thumbnails sometimes not updating properly with native trickplay.</li>
+          <li>Translation updates from Weblate - thanks to divergency, Fjuro, gallegonovato, kilaketia, Outbreak2096, smrtrfszm, Tuba2, and Vistaus.</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.7" date="2024-10-07">
+      <description>
+        <ul>
+          <li>Fixed an issue that caused the scrubber timestamp popup to be stuck in place instead of following the mouse cursor</li>
+          <li>Translation updates from Weblate - thanks to Tuba2</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.6" date="2024-09-13">
+      <description>
+        <p>Added:</p>
+
+        <ul>
+          <li>Add setting to use episode images in Next Up and Continue Watching sections - thanks
+            @Dragnansia</li>
+          <li>Support mixed content type collections</li>
+          <li>Add a tooltip to ellipsized episode titles displaying the full episode title - thanks
+            @Dragnansia</li>
+          <li>Show video chapters in the scrubber bar</li>
+          <li>Allow setting a custom amount to skip forwards/backwards by when pressing the skip
+            buttons or left/right arrow keys</li>
+          <li>Keyboard shortcuts for playback speed (&lt; to slow down, &gt; to speed up)</li>
+        </ul>
+
+        <p>Changed:</p>
+
+        <ul>
+          <li>Improve library layout for smaller screens - thanks @ashleyr</li>
+          <li>Use collection name in Latest rows on homepage - thanks @selfhoster1312</li>
+          <li>Translation updates from Weblate - thanks to Dirk, Dragnansia, Eryk Michalak, Fjuro,
+            gallegonovato, kilaketia, Monti, Outbreak2096, smrtrfszm, Tuba2, and Vistaus</li>
+        </ul>
+
+        <p>Fixed:</p>
+
+        <ul>
+          <li>Double-clicking to enter fullscreen would cause videos to pause - thanks @nemesisx00</li>
+          <li>Collections page displaying incorrect total collections count - thanks @Dragnansia</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.5" date="2024-05-27">
+      <description>
+        <ul>
+          <li>Support Jellyfin 10.9 API</li>
+          <li>Support Jellyfin 10.9 trickplay</li>
+          <li>Account and server list design improvements - thanks to Ashley Rudelsheim</li>
+          <li>Show hours in video player timestamp</li>
+          <li>Add 1.75x playback speed</li>
+          <li>Keyboard navigation improvements</li>
+          <li>Translation updates from Weblate - thanks to Eryk Michalak, Fjuro, owofied, Tuba2,
+            Vistaus, yanndvd, and yareg</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.4" date="2024-04-22">
+      <description>
+        <ul>
+          <li>Fix video playback opening a separate window with MPV 0.38.0</li>
+          <li>Translation updates – thanks to Codeberg users gallegonovato, Medzik, ThetaDev, and
+            Tuba2</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.3" date="2024-03-26">
+      <description>
+        <ul>
+          <li>Added playback speed control to video player</li>
+          <li>Updated dependencies</li>
+          <li>Translation updates – thanks to Codeberg users Eryk Michalak, Fjuro, Kenxu2022,
+            smrtrfszm, Vistaus</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.2" date="2024-03-16">
+      <description>
+        <ul>
+          <li>Map escape key to exit fullscreen instead of back in video player</li>
+          <li>Fix high bitrate media not being direct played</li>
+          <li>Fix collections page title not being localized</li>
+          <li>Translation updates from Weblate – thanks to Codeberg users Application-Maker, Dirk,
+            Filipe Motta, Fjuro, gallegonovato, Heimen Stoffels, and ThetaDev</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.1" date="2024-02-18">
+      <description>
+        <ul>
+          <li>You can now mark movies, series, and episodes as watched or not watched</li>
+          <li>You can now click on My Media and Latest home section headings to see the rest of the
+            collection</li>
+          <li>Movie runtime is now displayed above the description</li>
+          <li>The year that an item was released/in production is now displayed below its thumbnail</li>
+          <li>Fix app crashing when you try to close it</li>
+          <li>Updated dependencies</li>
+          <li>Translation updates from Weblate – thanks to Codeberg users Filipe Motta, Fjuro,
+            gallegonovato, Heimen Stoffels, ThetaDev, and yareg</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.4.0" date="2024-01-28">
+      <description>
+        <p>Features:</p>
+        <ul>
+          <li>You can now access all your collections from the new collections page</li>
+          <li>"My Media" and "My Media (small)" sections are now displayed on the home screen</li>
+          <li>When reopening Delfin, you will be automatically signed in to your most recently used
+            account (this can be disabled in preferences)</li>
+        </ul>
+
+        <p>Changes and bugfixes:</p>
+        <ul>
+          <li>Fixed an issue where adding another account to a server causes previous accounts to be
+            signed out</li>
+          <li>Added keyboard shortcuts to quit (Ctrl + Q), close window (Ctrl + W), refresh library
+            (Ctrl + R), open menu (F10), and open preferences (Ctrl + ,)</li>
+          <li>Reduce flickering at start of video playback</li>
+          <li>Show HTTPS prefix that gets automatically added to URL in add server dialog - it can
+            be replaced with an HTTP prefix if necessary</li>
+          <li>Improvements to playback reporting to server - play/pause is now reported, and a stop
+            is reported when the app is closed</li>
+          <li>When refreshing the episode listing for a show, the selected season is now remembered</li>
+          <li>Subtitle/audio tracks menu now prefers opening upwards when possible</li>
+          <li>You can click on the duration label to swap between total time and remaining time -
+            the label's state is now saved when you reopen Delfin</li>
+          <li>Updated Delfin Flatpak's MPV version to 0.37.0</li>
+          <li>Translation updates from Weblate - thanks to Codeberg users Anthell, bitals, Eryk
+            Michalak, Filipe Motta, Fjuro, Heimen Stoffels, k1llo, smrtrfszm, and ThetaDev</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.3.0" date="2023-12-27">
+      <description>
+        <p>Happy holidays/new year! This release adds several new features and bugfixes.</p>
+
+        <p>Features:</p>
+        <ul>
+          <li>You can now search your library by pressing the search button, or Ctrl + F (#6)</li>
+          <li>Media playback will now be reported over MPRIS, allowing for better integration with
+            your desktop (such as controlling playback with media keys) (#34)</li>
+          <li>Idling is now inhibited during playback to prevent your system from locking the screen
+            or going to sleep (#35)</li>
+        </ul>
+
+        <p>Changes and bugfixes:</p>
+        <ul>
+          <li>Adjustments to library design</li>
+          <li>A status page is now shown if your server is offline, or if there's an error loading
+            your library (#19)</li>
+          <li>Fixed library collections sometimes showing folders and missing nested items (#38)</li>
+          <li>The previous window size will be restored when opening the app (#24)</li>
+          <li>Translation updates from Weblate - thanks to Codeberg users Fjuro, Filipe Motta,
+            Heimen Stoffels, ThetaDev, yareg, K0RR, nikolar, gloopsies, k1llo, Sergio Varela, and
+            DegradingVagabond! (#36)</li>
+          <li>Updated Flatpak dependencies to fix issue where some audio/video codecs did not play
+            (#23)</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.2.1" date="2023-12-06">
+      <description>
+        <p>This release contains minor changes and bug fixes.</p>
+        <ul>
+          <li>Double clicking in the video player will toggle fullscreen - #17</li>
+          <li>Exiting the video player will exit fullscreen - #10</li>
+          <li>Fix library not loading when user has a library with mixed content types. For now,
+            only libraries that have their content type explicitely set to movies or TV shows will
+            be
+            available. - #7</li>
+          <li>Fix content titles being missing if they contain an ampersand - #9</li>
+          <li>Translation updates from Weblate (thanks to @IngrownMink4, @DegradingVagabond, and
+            @k1llo on Codeberg) - #8, #29</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.2.0" date="2023-12-04">
+      <description>
+        <p>This release adds several new subtitle features, some new video player features,
+          and some minor changes and bug fixes.</p>
+
+        <p>Features:</p>
+        <ul>
+          <li>External subtitles (that aren't embedded in the video stream) will now be
+            available</li>
+          <li>Add subtitle style preferences, allowing you to configure subtitle font,
+            colours, size, and position</li>
+          <li>Add keybindings (comma and period) to seek through videos frame-by-frame</li>
+          <li>By default, the video player controls will be shown when you move the mouse,
+            and hidden a few seconds after you stop moving the mouse</li>
+          <li>Add a preference that lets you configure left mouse click to toggle the
+            video player controls, instead of using mouse movement</li>
+          <li>Add a preference to manually change the app's language</li>
+        </ul>
+
+        <p>Changes and bugfixes:</p>
+        <ul>
+          <li>Fix a crash when trickplay thumbnails are missing</li>
+          <li>Use a higher resolution thumbnail while counting down to the next episode</li>
+          <li>Fix the account list not always updating after adding or removing an account</li>
+          <li>Improve grouping of plugin preferences</li>
+          <li>Limit the library to only show the user's first five collections.
+            Previously, users with a large number of collections would run into UI
+            issues. A better fix that allows access to all libraries is coming, but for
+            now you can reorder your libraries in Jellyfin's settings to make them
+            accessible.</li>
+          <li>Fix links in the preferences not opening when you click on them</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="0.1.0" date="2023-11-27">
+      <description>
+        <p>This is the first release of Delfin!</p>
+        <p>Currently, Delfin lets you stream movies and TV shows from your Jellyfin server.</p>
+        <p>This is an early release, you may run into bugs and missing features.</p>
+      </description>
+    </release>
+  </releases>
+</component>

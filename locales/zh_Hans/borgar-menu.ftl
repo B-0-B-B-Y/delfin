@@ -1,0 +1,11 @@
+borgar-menu-tooltip = 主菜单
+borgar-sign-out = 退出
+borgar-preferences = 首选项
+borgar-keyboard-shortcuts = 键盘快捷键
+borgar-about = 关于 { app-name }
+borgar-sign-out-dialog =
+    .heading = 退出
+    .body = 是否要从 { app-name } 中退出并移除此账号？
+    .response-cancel = 取消
+    .response-sign-out = 退出
+borgar-sign-out-dialog-remove-server = 从 { app-name } 中移除此服务器

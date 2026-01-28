@@ -1,0 +1,17 @@
+account-list-page-title = Accounts
+account-list =
+    .title = Sign in to { $serverName }
+    .description = Select which account you'd like to sign in with
+account-list-empty =
+    .title = No Accounts Available
+    .subtitle = Add an account to start watching
+account-list-add-account-button = Add an Account
+account-list-add-account-title = Add an Account
+account-list-add-account-username = Username
+account-list-add-account-password = Password
+account-list-add-account-submit-button = Sign in
+account-list-quick-connect = Quick Connect
+account-list-quick-connect-instructions = Enter the following code to quick connect:
+account-list-quick-connect-copy-tooltip = Copy Code to Clipboard
+account-list-quick-connect-copy-toast = Code copied to clipboard
+account-list-quick-connect-loading = Awaiting authorization...

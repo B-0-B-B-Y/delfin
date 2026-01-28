@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: detect-private-key
+      - id: mixed-line-ending
+
+  - repo: https://codeberg.org/avery42/pre-commit-rust.git
+    rev: v1.0.0
+    hooks:
+      - id: cargo-clippy
+        args: ["--", "-Dwarnings"]
+      - id: cargo-test
+      - id: cargo-fmt
+        exclude: video_player_mpv/

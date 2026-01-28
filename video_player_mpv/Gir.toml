@@ -1,0 +1,24 @@
+[options]
+library = "Vpm"
+version = "0.0"
+min_cfg_version = "1.0"
+target_path = "."
+girs_directories = ["./sys/build/", "./sys/gir-files/"]
+work_mode = "normal"
+single_version_file = true
+generate_safety_asserts = true
+deprecate_by_min_version = true
+external_libraries = ["GLib", "Gtk", "Gdk", "GObject"]
+
+generate = ["Vpm.VideoPlayerMpv", "Vpm.Track", "Vpm.TrackList", "Vpm.TrackType"]
+
+manual = [
+  "GObject.InitiallyUnowned",
+  "Gdk.GLContext",
+  "Gtk.Accessible",
+  "Gtk.Buildable",
+  "Gtk.ConstraintTarget",
+  "Gtk.GLArea",
+  "Gtk.Widget",
+  "GLib.String",
+]
